@@ -4,12 +4,14 @@ import disnake
 import yt_dlp as youtube_dl
 from disnake.ext import commands
 
+from secret_stuff import SecretStuff
 from playlist import Playlist
+secret_stuff = SecretStuff()
 playlist = Playlist()
 
 bot = commands.Bot(command_prefix="!", intents=disnake.Intents.all())
 
-FFMPEG_PATH = "./ffmpeg/ffmpeg/bin/ffmpeg.exe"
+FFMPEG_PATH = secret_stuff.ffmpeg_path
 FFMPEG_OPTIONS = {
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
     'options': '-vn',
@@ -125,5 +127,4 @@ def get_video_data(url):
                 }
                 return data
 
-TOKEN = "MTA5MDkzMDk3OTUxNTkzNjc4OA.GP7n3G.4FA0Flwrk-I14Vzzih99e0ZbkVyPVR83zh4JU0"
-bot.run(TOKEN)
+bot.run(secret_stuff.token)
